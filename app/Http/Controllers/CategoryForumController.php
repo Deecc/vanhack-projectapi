@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\CategoryForum as CatForum;
 
 class CategoryForumController extends Controller
 {
@@ -14,18 +15,10 @@ class CategoryForumController extends Controller
     public function index()
     {
         //
+        return CatForum::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -35,6 +28,7 @@ class CategoryForumController extends Controller
     public function store(Request $request)
     {
         //
+        return CatForum::create($request->all());
     }
 
     /**
@@ -46,19 +40,10 @@ class CategoryForumController extends Controller
     public function show($id)
     {
         //
+        return CatForum::findOrFail($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
+   
     /**
      * Update the specified resource in storage.
      *
@@ -69,6 +54,10 @@ class CategoryForumController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $catforum = CatForum::findOrFail($id);
+        $catforum->update($request->all());
+
+        return 204;
     }
 
     /**
@@ -80,5 +69,9 @@ class CategoryForumController extends Controller
     public function destroy($id)
     {
         //
+        $catforum = CatForum::findOrFail($id);
+        $catforum->delete();
+
+        return 204;
     }
 }

@@ -15,19 +15,10 @@ class CompanyController extends Controller
     public function index()
     {
         //
-        return $companies = Company::all();
+        return Company::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+   
     /**
      * Store a newly created resource in storage.
      *
@@ -37,6 +28,7 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         //
+        return Company::create($request->all());
     }
 
     /**
@@ -48,19 +40,10 @@ class CompanyController extends Controller
     public function show($id)
     {
         //
+        return Company::findOrFail($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
+   
     /**
      * Update the specified resource in storage.
      *
@@ -71,6 +54,10 @@ class CompanyController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $companies = Company::findOrFail($id);
+        $companies->update($request->all());
+
+        return 204;
     }
 
     /**
@@ -82,5 +69,9 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         //
+        $companies = Company::findOrFail($id);
+        $companies->delete();
+
+        return 204;
     }
 }

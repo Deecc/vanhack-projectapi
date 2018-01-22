@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Address;
 
 class AddressController extends Controller
 {
@@ -13,17 +14,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Address::all();
     }
 
     /**
@@ -35,6 +26,7 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         //
+        Address::create($request->all());
     }
 
     /**
@@ -46,17 +38,7 @@ class AddressController extends Controller
     public function show($id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+       return Address::findOrFail($id);
     }
 
     /**
@@ -69,6 +51,10 @@ class AddressController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $address = Address::findOrFail($id);
+        $address->update($request->all());
+
+        return 204;
     }
 
     /**
@@ -80,5 +66,8 @@ class AddressController extends Controller
     public function destroy($id)
     {
         //
+        $address = Address::findOrFail($id);
+        $address->delete();
+        return 204;
     }
 }

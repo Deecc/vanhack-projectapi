@@ -18,16 +18,7 @@ class UserController extends Controller
         return $users = User::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -37,6 +28,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $user = new User;
+
+        $user->fill($request->all());
+        $user->save();
+        return "Registration sucessfull!";
     }
 
     /**
@@ -48,18 +44,11 @@ class UserController extends Controller
     public function show($id)
     {
         //
+        $user = User::findOrFail($id);
+
+        return $user;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -71,6 +60,16 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user = User::findOrFail($id);
+        $user->fill($request->all());
+
+        if ($user->save())
+        {
+            return "Modifications saved!";
+        } else
+        {
+            return "Failed to update data.";
+        }
     }
 
     /**
@@ -82,5 +81,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return "Account deleted.";
     }
 }

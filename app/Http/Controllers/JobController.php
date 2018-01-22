@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Job;
 
 class JobController extends Controller
 {
@@ -14,17 +15,10 @@ class JobController extends Controller
     public function index()
     {
         //
+        return Job::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -35,6 +29,7 @@ class JobController extends Controller
     public function store(Request $request)
     {
         //
+        return Job::create($request->all());
     }
 
     /**
@@ -46,19 +41,10 @@ class JobController extends Controller
     public function show($id)
     {
         //
+        return Job::findOrFail($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
+   
     /**
      * Update the specified resource in storage.
      *
@@ -69,6 +55,10 @@ class JobController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $jobs = Job::findOrFail($id);
+        $jobs->update($request->all());
+
+        return 204;
     }
 
     /**
@@ -80,5 +70,9 @@ class JobController extends Controller
     public function destroy($id)
     {
         //
+        $jobs = Job::findOrFail($id);
+        $jobs->delete();
+
+        return 204;
     }
 }

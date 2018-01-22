@@ -18,6 +18,7 @@ class CreateJobsTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->integer('positions');
+            $table->boolean('status');
             $table->integer('categoriesId')->unsigned();
             $table->integer('companiesId')->unsigned();            
             $table->timestamps();

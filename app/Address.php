@@ -8,7 +8,7 @@ class Address extends Model
 {
 
     protected $fillable = [
-        'street', 'number', 'complement', 'province', 'city'
+        'street', 'number', 'complement', 'province', 'city', 'addressesId'
     ];
     
     public function countries() {
